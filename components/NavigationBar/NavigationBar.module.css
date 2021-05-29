@@ -1,0 +1,77 @@
+.NavigationBar {
+	width: 100%;
+	height: 56px;
+	background-color: #34495e;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10 15px;
+	box-sizing: border-box;
+	z-index: 90;
+
+	flex-flow: column;
+}
+
+.NavigationBar h3 {
+	color: #fff;
+}
+
+.NavigationBar nav {
+	height: 100%;
+	display: flex;
+}
+
+.SideBar {
+	display: none;
+	background-color: #34495e;
+	color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 200;
+    transform: translateY(-500px);
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+
+.Backdrop {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+    left: 0;
+	display: none;
+	background-color: rgba(0, 0, 0, 0);
+	z-index: 150;
+
+	-webkit-transition: all 1s linear;
+	-moz-transition: all 1s linear;
+	-ms-transition: all 1s linear;
+	-o-transition: all 1s linear;
+	transition: all 1s linear;
+}
+
+
+.SideBar.Open {
+    transform: translateY(0px);
+}
+
+
+@media (max-width: 760px) {
+	.SideBar {
+		display: flex;
+	}
+
+	.Backdrop {
+		display: block;
+	}
+
+	.NavigationBar {
+		height: 70px;
+	}
+}

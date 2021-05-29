@@ -1,0 +1,18 @@
+.ServerAdd {
+    padding: 0px;
+    margin: 0px;
+}
+
+.ServerAdd .Button {
+    display: block;
+    margin: 0px auto;
+}
+
+
+.ServerAdd h3 {
+    background: #34495e;
+    color: #FFF;
+    padding: 10px 20px 10px 20px;
+    box-sizing: border-box;
+    font-weight: 400;
+}

@@ -1,0 +1,29 @@
+.Input {
+    width: 100%;
+
+    padding: 5px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    border-radius: 0;
+    border: 1px solid #ddd;
+    background: #eee;
+}
+
+.Input.Invalid, .Input.Invalid:focus {
+    outline: 1px solid red;
+}
+
+.Input.Valid, .Input.Valid:focus {
+    outline: 1px solid green;
+}
+
+.Input:focus {
+    outline: 1px solid #bbb;
+}
+.Label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+    width: 100%;
+    font-size: 1em;
+}

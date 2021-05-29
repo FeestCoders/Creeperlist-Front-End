@@ -1,0 +1,40 @@
+.ManageServer {
+    height: 80px;
+    line-height: 80px;
+    box-sizing: border-box;
+}
+
+.ManageServer:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.ManageServer td {
+    padding: 10px;
+    height: 100%;
+}
+
+.ManageServer > td > img {
+    line-height: 80px;
+}
+
+.ManageServer .name {
+    cursor: pointer;
+}
+
+.ManageServer .banner {
+    background: lightgray;
+    width: 468px;
+    height: 60px;
+
+    cursor: pointer;
+}
+
+.ManageServer .banner:hover {
+    cursor: pointer;
+}
+
+.ServerAction {
+    margin-right: 2em;
+    cursor: pointer;
+}

@@ -1,0 +1,9 @@
+User-Agent: *
+Disallow: /server/add
+Disallow: /server/manage/*
+Disallow: /server/manage
+Disallow: /server/*/vote
+
+Sitemap: https://example.com/sitemap.xml
+
+

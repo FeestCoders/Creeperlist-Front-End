@@ -1,0 +1,13 @@
+.ServerList {
+
+}
+
+.ServerList thead {
+    background: #000;
+    color: #FFF;
+   
+}
+
+.ServerList thead th {
+    padding: 10px 0;
+}

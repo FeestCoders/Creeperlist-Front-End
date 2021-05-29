@@ -1,0 +1,24 @@
+.Register {
+
+}
+
+.Register .Button {
+    display: block;
+    margin: 0px auto;
+}
+
+.Register .Recaptcha {
+    margin: 0px auto;
+    width: auto;
+    text-align: center;
+    justify-content: center;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.Register .Recaptcha > div {
+    width: auto;
+    display: inline-block;
+    margin: 0px auto;
+}

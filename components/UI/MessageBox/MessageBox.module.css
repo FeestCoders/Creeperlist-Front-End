@@ -1,0 +1,29 @@
+.MessageBox {
+    width: 100%;
+    height: auto;
+
+    padding: 10px 5px;
+
+    box-sizing: border-box;
+
+    margin-bottom: 15px;
+    
+    border-radius: 4px;
+}
+
+.Icon {
+    padding: 10px;
+}
+
+.Danger {
+    background-color: rgb(223, 83, 83);
+    border: 1px solid maroon;
+    color: rgb(255, 255, 255);
+}
+
+.Success {
+    background-color: rgb(129, 173, 72);
+    border: 1px solid rgb(83, 128, 0);
+    color: rgb(255, 255, 255);
+}
+

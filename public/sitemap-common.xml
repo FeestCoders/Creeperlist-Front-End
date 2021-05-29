@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+  <url>
+    <loc>https://example.com/</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/api/login</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/contact</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/login</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/logout</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/privacy</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/register</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/sponsor</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/tos</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/server/add</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/server/manage</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+
+  <url>
+    <loc>https://example.com/server/52</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod> </url
+  ><url>
+    <loc>https://example.com/server/75</loc>
+    <lastmod>2021-02-10T03:02:17.026Z</lastmod>
+  </url>
+</urlset>

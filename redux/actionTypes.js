@@ -1,0 +1,9 @@
+export const AUTHENTICATE = "AUTHENTICATE";
+export const DEAUTHENTICATE = "DEAUTHENTICATE";
+export const AUTHENTICATE_FAIL = "AUTHENTICATE_FAIL";
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_END = "LOGIN_END";
+
+
+export const JUST_VOTED = "JUST_VOTED";
+export const JUST_VOTED_CLEAR = "JUST_VOTED_CLEAR";

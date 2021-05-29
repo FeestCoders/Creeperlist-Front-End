@@ -1,0 +1,177 @@
+.Server {
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+}
+
+.Server:hover {
+    background-color: #eee;
+}
+
+.Server td {
+    padding: 10px;
+/* 
+    word-wrap:break-word;
+    word-break:break-all;
+    vertical-align: middle; */
+}
+
+
+
+.Server .name {
+    cursor: pointer;
+
+}
+
+.Link {
+    color: black;
+    text-decoration: none;
+}
+
+.Banner img {
+    background: lightgray;
+    width: 468px;
+    height: 60px;
+    display: block;
+    margin: 0px auto;
+    cursor: pointer;
+}
+
+.Banner img:hover {
+    cursor: pointer;
+}
+
+
+.ServerIp {
+    background-color: #ddd;
+    padding: 5px;
+    box-sizing: border-box;
+    width: 468px;
+    margin: 0px auto;
+    cursor: text;
+}
+
+.Rank > span {
+    background-color: #bdc3c7;
+    color: rgb(92, 92, 92);
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 10px 12px;
+}
+
+.Sponsored {
+    background-color: rgb(238, 181, 36);
+    color: #FFF;
+}
+
+
+@media (max-width: 960px) {
+
+    .Server {
+        position: relative;
+        display: block;
+        margin-bottom: 40px;
+        position: relative;
+        background-color: #fff;
+        max-width: 100%;
+        margin: 0 auto 30px;
+        padding: 0;
+        border-radius: 4px;
+        overflow: hidden;
+        height: fit-content !important;
+        padding: 0 !important;
+    }   
+
+
+    .Rank {
+        width: 40px !important;
+        height: 40px !important;
+        position: absolute;
+        display: inline-block;
+        top: calc(50% - 10px);
+        left: 17px;
+        padding: 0px !important;
+    }
+
+    .Rank span {
+        padding-top: 7px !important;
+        vertical-align: middle;
+        box-sizing: border-box;
+    }
+
+    .Name {
+        width: 100% !important;
+        position: relative;
+        background-color: #34495e;
+        color: #FFF;
+        height: 40px !important;
+        display: inline-block;
+        text-align: center;
+
+    }
+
+    .Name span {
+        width: fit-content;
+        position: relative;
+        display: block;
+        margin: 0px auto;
+       
+    }
+
+    .Banner {
+        position: relative;
+  
+
+        display: block;
+        margin: 0px auto;
+    }
+
+    .Banner img {
+        width: 100%;
+        margin: 0px auto;
+   
+    }
+
+    .ServerIp {
+        width: 100%;
+        margin: 0px auto;
+        margin: 0;
+    }
+
+    .Players {
+        display: none;
+    }
+
+    .Status {
+        position: absolute;
+        right: 15px;
+        top: 115px;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+}
+
+@media (max-width: 760px) {
+    .Banner img {
+        max-width: 100%;
+        margin: 0px auto;
+    }
+
+    .ServerIp {
+        max-width: 100%;
+        margin: 0px auto;
+    }
+
+    .Status {
+        right: 15px;
+        top: 115px;
+    }
+
+    .Rank {
+        left: 8px;
+        top: 28px;
+        z-index: 100;
+    }
+}
