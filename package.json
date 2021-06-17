@@ -1,0 +1,38 @@
+{
+  "name": "servidoresmc",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "compression": "^1.6.2",
+    "connect-ensure-login": "^0.1.1",
+    "connect-mongodb-session": "^1.3.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "express-rate-limit": "^2.8.0",
+    "express-recaptcha": "^2.1.0",
+    "express-redis-cache": "^1.0.0",
+    "express-session": "^1.15.3",
+    "flash": "^1.1.0",
+    "minecraft-pinger": "^1.0.2",
+    "moment": "^2.18.1",
+    "mongoose": "^4.11.1",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "~1.8.1",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth": "^2.0.0",
+    "passport-google-oauth2": "^0.1.6",
+    "passport-twitter": "^1.0.4",
+    "pug": "^2.0.0-rc.2",
+    "rate-limit-redis": "^1.1.0",
+    "redis": "^2.7.1",
+    "serve-favicon": "~2.4.2",
+    "validator": "^7.2.0",
+    "votifier-send": "^0.1.7"
+  }
+}

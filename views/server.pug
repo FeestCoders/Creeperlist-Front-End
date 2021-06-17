@@ -1,0 +1,75 @@
+extends layout
+
+block css
+    link(rel='stylesheet', type='text/css', href='/css/bootstrap-tagsinput.css')
+
+block content
+    .container(itemscope, itemtype='http://schema.org/Review')
+        .section-title
+            h3.text-center(itemprop='name') #{server.name}
+            hr
+        .space
+        if(server.automatic)
+            .alert.alert-dismissable.alert-warning
+                a.close(href='#', data-dismiss='alert', aria-label='close') &times;
+                | This server is already added!, if it belongs to you and you want to change the data, let us know in our
+                a(href='https://dsc.gg/bennocraft')  Discord
+        .row
+            .col-sm-6.col-md-4(itemprop='itemReviewed', itemscope, itemtype='http://schema.org/Product')
+                .thumbnail
+                    img(src='/server/' + server.name + '/img', alt=server.name, itemprop='image')
+                .caption.table-responsive
+                    table.table
+                        tr
+                            td Añadido por
+                            td #{server.owner.displayName}
+                        tr
+                            td Estado
+                            if(new Date() - server.lastcheck < 120 * 1000)
+                                td En línea
+                            else
+                                td No disponible
+                        tr
+                            td IP
+                            td: a.copy(data-toggle='popover', data-placement='top', data-content='Copied!', ip=server.fullip, href='#')
+                                |  #{server.fullip}&nbsp;
+                                i.fa.fa-clone.text-info(aria-hidden='true')
+                        tr
+                            td Jugadores
+                            td #{server.players}/#{server.max}
+                        tr
+                            td Versión
+                            td #{server.version.replace(/§[0-9a-fA-Flk]/g, '')}
+                        tr
+                            td Likes
+                            td #{server.likes}
+                        tr
+                            td Disponibilidad
+                            td #{parseInt(server.success / server.times * 100)}%
+                        tr
+                            td Comprobado
+                            td #{moment(server.lastcheck).fromNow()}
+                        tr
+                            td Etiquetas
+                            td #{server.games.join(', ') || 'Unknown'}
+                    a.btn.btn-warning(href='/server/' + server.name + '/like', role='button')
+                        i.glyphicon.glyphicon-heart-empty(aria-hidden='true')
+                        |  Me gusta
+                    if(user && server.owner._id === user._id)
+                        a.btn.btn-primary(href='/server/' + server.name + '/edit', role='button')
+                            i.glyphicon.glyphicon-edit(aria-hidden='true')
+                            |  Editar
+
+            .col-md-6
+                .panel.panel-default
+                    .panel-body
+                        p(itemprop='reviewBody') !{server.description.replace(/\n/g, '<br>')}
+                        p
+                            |-
+                            span(itemprop='author', itemscope='', itemtype='http://schema.org/Person')
+                                span(itemprop='name') #{server.owner.displayName}
+                if(server.youtube)
+                    .panel.panel-default
+                        .panel-body
+                            .video-container
+                                iframe.video(src=server.embed, frameborder='0', allowfullscreen)

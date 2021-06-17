@@ -1,0 +1,100 @@
+extends layout
+
+block javascript
+    script(type='text/javascript', src='/js/bootstrap-tagsinput.min.js')
+    script(type='text/javascript', src='/js/typeahead.js')
+    script.
+        $("#votifier").change(function () {
+            $(".votifier").slideToggle(this.checked);
+            $('[name="votifier_ip"]').prop('required', this.checked);
+            $('[name="votifier_port"]').prop('required', this.checked);
+            $('[name="votifier_key"]').prop('required', this.checked);
+        })
+        var games = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            prefetch: {
+                url: '/data/minigames.json',
+                filter: function (list) {
+                    return $.map(list, function (game) {
+                        return { name: game };
+                    });
+                }
+            }
+        });
+        games.initialize();
+
+        $('#games').tagsinput({
+            typeaheadjs: {
+                name: 'games',
+                displayKey: 'name',
+                valueKey: 'name',
+                source: games.ttAdapter()
+            },
+            maxTags: 5,
+            allowDuplicates: false
+        });
+        $('#games').tagsinput('add', 'Bukkit');
+        $('.bootstrap-tagsinput input').on('keypress', function (e) {
+            if (e.keyCode == 13) {
+                e.keyCode = 188;
+                e.preventDefault();
+            }
+        });
+
+block css
+    link(rel='stylesheet', type='text/css', href='/css/bootstrap-tagsinput.css')
+    style.
+        /*noinspection CssUnknownTarget*/
+        #main {
+            background: url('/img/08.jpg') repeat-x;
+        }
+
+block content
+    .container
+        .section-title
+            h3.text-center Add a server
+            hr
+        .space
+        .row
+            .col-md-6.col-md-offset-3
+                form(action='/server/new', method='POST')
+                    .form-group
+                        input.form-control(type='text', placeholder='Server Name', required=true, name='name')
+                    .form-group
+                        input.form-control(type='text', placeholder='Server IP', required=true, name='ip')
+                    .form-group
+                        input.form-control(type='number', placeholder='Port (Optional)', name='port')
+                    .form-group
+                        textarea.form-control(rows='4', placeholder='Description', required=true, name='description')
+                    .form-group
+                        input.form-control(type='text', placeholder='Youtube Trailer (Optional)', name='youtube')
+                    // Votifier
+                    .checkbox
+                        label
+                            input#votifier(type="checkbox")
+                            | Activate Votifier
+                    .votifier(style='display: none')
+                        .form-group
+                            input.form-control(type='text', placeholder='IP', name='votifier_ip')
+                        .form-group
+                            input.form-control(type='number', placeholder='Port', name='votifier_port', value='8192')
+                        .form-group
+                            textarea.form-control(rows='4', placeholder='Votifier Public Key', name='votifier_key')
+                    .form-group
+                        p Tip
+                        select.form-control#type(name='type', required=true)
+                            option(value='0') No premium
+                            option(value='1') Semi-premium
+                            option(value='2') Premium Only
+                    .form-group
+                        p Labels (Maximum 5)
+                        input#games(type='text', data-role="tagsinput", name='games')
+                    .checkbox
+                        label
+                            input(type="checkbox", required=true)
+                            | I am a member of the administrative team of the server and I accept the
+                            a(href='/tos')  Terms of Service
+                    .form-group
+                        | !{captcha}
+                    button.btn.btn-primary.my-btn.dark(type='submit') Submit

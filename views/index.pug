@@ -1,0 +1,140 @@
+extends layout
+
+block javascript
+    script(type="application/ld+json").
+        {
+              "@context": "http://schema.org",
+              "@type": "WebSite",
+              "url": "https://servidoresminecraft.co/",
+              "name": "Servidores de Minecraft",
+              "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://servidoresminecraft.co/search/{query}",
+                  "query-input": "required"
+              }
+          }
+
+block head
+    if(pagination.page === 1)
+        .container
+            .content
+                h1 Creeperlist
+                h3 The best minecraft server list on the planet
+                a.btn.btn-default.btn-lg(href='#featured')
+                    i.fa.fa-rocket(aria-hidden=true)
+                    |  Lets go!
+
+block content
+    #featured.space(style="padding-top: 200px; margin-top: -200px;")
+        if(top && top.length > 0)
+            .container
+                .section-title
+                    h2.text-center Recommended servers
+                    hr
+                .row
+                    .col-md-8.col-md-offset-2
+                        .table-responsive
+                            table.table.table-striped
+                                thead
+                                    tr
+                                        th.hidden-xs.hidden-sm
+                                        th Server
+                                        th.hidden-xs IP
+                                        th.hidden-xs.hidden-sm Players
+                                        th.hidden-xs.hidden-sm Tip
+                                        th
+                                            i.glyphicon.glyphicon-heart-empty(aria-hidden='true')
+                                tbody
+                                    each server in top
+                                        tr
+                                            td.hidden-xs.hidden-sm
+                                                a(href='/server/' + server.name)
+                                                    img.img-thumbnail(src='/server/' + server.name + '/img', alt=server.name)
+                                            td
+                                                a(href='/server/' + server.name) #{server.name}
+                                            td.hidden-xs
+                                                a.copy(data-toggle="popover", data-placement="top", data-content="¡Copiado!", ip=server.fullip, href='#')
+                                                    | #{server.fullip}&nbsp;
+                                                    i.fa.fa-clone.text-info(aria-hidden='true')
+                                            td.hidden-xs.hidden-sm
+                                                | #{server.players}
+                                                i.text-muted /
+                                                | #{server.max}
+                                            if server.type === 2
+                                                td.text-danger.hidden-xs.hidden-sm: b Premium Only
+                                            else if server.type === 1
+                                                td.text-warning.hidden-xs.hidden-sm: b Semi-premium
+                                            else
+                                                td.text-success.hidden-xs.hidden-sm: b No premium
+                                            td
+                                                | #{server.likes || 0}&nbsp;
+                                                i.fa.fa-heart.text-danger(aria-hidden='true')
+        .container
+            .section-title
+                h2.text-center Featured servers
+                hr
+            .row
+                .col-md-8.col-md-offset-2
+                    .table-responsive
+                        table.table.table-striped
+                            thead
+                                tr
+                                    th.hidden-xs.hidden-sm
+                                    th Server
+                                    th.hidden-xs IP
+                                    th.hidden-xs.hidden-sm Players
+                                    th.hidden-xs.hidden-sm Tip
+                                    th
+                                        i.glyphicon.glyphicon-heart-empty(aria-hidden='true')
+                            tbody
+                                each server in servers
+                                    tr
+                                        td.hidden-xs.hidden-sm
+                                            a(href='/server/' + server.name)
+                                                img.img-thumbnail(src='/server/' + server.name + '/img', alt=server.name)
+                                        td
+                                            a(href='/server/' + server.name) #{server.name}
+                                        td.hidden-xs
+                                            a.copy(data-toggle="popover", data-placement="top", data-content="¡Copiado!", ip=server.fullip, href='#')
+                                                | #{server.fullip}&nbsp;
+                                                i.fa.fa-clone.text-info(aria-hidden='true')
+                                        td.hidden-xs.hidden-sm
+                                            | #{server.players}
+                                            i.text-muted /
+                                            | #{server.max}
+                                        if server.type === 2
+                                            td.text-danger.hidden-xs.hidden-sm: b Premium Only
+                                        else if server.type === 1
+                                            td.text-warning.hidden-xs.hidden-sm: b Semi-premium
+                                        else
+                                            td.text-success.hidden-xs.hidden-sm: b No premium
+                                        td
+                                            | #{server.likes || 0}&nbsp;
+                                            i.fa.fa-heart.text-danger(aria-hidden='true')
+
+                    .text-center
+                        nav(aria-label='Page navigation')
+                            ul.pagination
+                                if(pagination.page <= 1)
+                                    li.disabled
+                                        a(aria-label='Previous')
+                                            span(aria-hidden='true') «
+                                else
+                                    li
+                                        a(href='/' + (pagination.page - 1), aria-label='Previous')
+                                            span(aria-hidden='true') «
+                                - for(var i = 1; i <= pagination.pages; i++)
+                                if(i === pagination.page)
+                                    li.active
+                                        a(href='#') #{i}
+                                else
+                                    li
+                                        a(href='/' + i) #{i}
+                                if(pagination.page >= pagination.pages)
+                                    li.disabled
+                                        a(href='#', aria-label='Next')
+                                            span(aria-hidden='true') »
+                                else
+                                    li
+                                        a(href='/' + (pagination.page + 1), aria-label='Next')
+                                            span(aria-hidden='true') »

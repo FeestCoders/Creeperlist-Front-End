@@ -1,0 +1,31 @@
+extends layout
+block css
+    style.
+        .text-xs-center {
+            text-align: center;
+        }
+
+        .g-recaptcha {
+            display: inline-block;
+        }
+block content
+    .container
+        .section-title
+            h3.text-center #{server.name}
+            hr
+        .space
+        .row
+            .col-md-6.col-md-offset-3
+                .panel.panel-default
+                    .panel-body.text-center
+                        p.text-muted Abusing the likes system is punishable.
+                        form(action='/server/' + server._id + '/like', method='POST')
+                            if(server.votifier_ip && server.votifier_key)
+                                .form-group
+                                    input.form-control(type='text', placeholder='Your minecraft user', name='user')
+                            .form-group
+                                | !{captcha}
+                            .form-group
+                                button.btn.btn-warning(type='submit')
+                                    i.glyphicon.glyphicon-heart-empty(aria-hidden='true')
+                                    |  I like it :)

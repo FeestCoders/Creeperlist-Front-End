@@ -1,0 +1,120 @@
+doctype html
+html(lang='es')
+  head
+    meta(charset='utf-8')
+
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title #{title} | Servidores Minecraft
+
+    meta(name='description', content='Los mejores servidores de Minecraft de Habla Hispana, aquí encontraras servidores de todo tipo, ¡Encuentra el más divertido!')
+    meta(name='author', content='https://twitter.com/Servidores__MC')
+
+    link(rel='icon', href='/favicon.ico', type='image/x-icon')
+
+    // Bootstrap
+    link(rel='stylesheet', type='text/css', href='/css/bootstrap.css')
+    link(rel='stylesheet', type='text/css', href='/css/font-awesome.css')
+
+    // CSS
+    link(rel='stylesheet', type='text/css', href='/css/style.css')
+    link(rel='stylesheet', type='text/css', href='/css/responsive.css')
+    block css
+
+    script(type='text/javascript', src='/js/modernizr.custom.js')
+
+    link(href='https://fonts.googleapis.com/css?family=Raleway:500,600,700,100,800,900,400,200,300', rel='stylesheet', type='text/css')
+  body
+    #wrap
+      #main
+        #tf-home
+          .overlay
+            #sticky-anchor
+            nav#tf-menu.navbar.navbar-default
+              .container
+                .navbar-header
+                  button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar-collapse')
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                  a.navbar-brand(href='/')
+                    img(alt='Brand', src='/img/logo.png')
+                .collapse.navbar-collapse#navbar-collapse
+                  ul.nav.navbar-nav.navbar-left
+                    li
+                      a(href='/players')
+                        i.fa.fa-arrow-up(aria-hidden='true')
+                        |  Most Players
+                    li
+                      a(href='/free')
+                        i.fa.fa-fire(aria-hidden='true')
+                        |  No premium
+                    li
+                      a(href='/premium')
+                        i.fa.fa-check(aria-hidden='true')
+                        |  Premium
+                    if (!user)
+                      li
+                        a(href='/login') Login
+                    else
+                      li.dropdown
+                        a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                          | #{user.displayName}
+                          span.caret
+                        ul.dropdown-menu
+                          li
+                            a(href='/server')
+                              i.fa.fa-rocket(aria-hidden='true')
+                              |  My servers
+                          li
+                            a(href='/logout')
+                              i.fa.fa-sign-out(aria-hidden='true')
+                              |  Log out
+                  form.navbar-form.navbar-right(action='/search', method='get')
+                    .input-group
+                      input.form-control(type='text', name='q', placeholder='Search for...')
+                      .input-group-btn
+                        button.btn.btn-default(type='submit')
+                          i.glyphicon.glyphicon-search
+
+            block head
+        .container
+          .row
+            .col-md-6.col-md-offset-3
+              while message = flash.shift()
+                .space
+                .alert.alert-dismissable(class='alert-' + message.type)
+                  a.close(href="#", data-dismiss="alert", aria-label="close") &times;
+                  | #{message.message}
+        block content
+    footer.footer
+      .container
+        .pull-left
+          p
+            | &copy; !{'<script>document.write(new Date().getFullYear())</script>'}
+            |  Made with&nbsp;
+            i.glyphicon.glyphicon-heart-empty.text-danger(aria-hidden='true')
+            |   and a lot of effort!
+          p
+            a(href='/tos')
+              i.fa.fa-gavel(aria-hidden='true')
+              |  Terms of Servuce
+            a(href='/tos')
+              i.fa.fa-user-secret(aria-hidden='true')
+              |  Privacy Policy
+
+    // JS
+    script(type='text/javascript', src='/js/jquery.min.js')
+    script(type='text/javascript', src="/js/bootstrap.min.js", integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa", crossorigin="anonymous")
+    script(type='text/javascript', src='/js/main.js')
+    block javascript
+    script(type="application/ld+json").
+      {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "Servidores de Minecraft",
+        "url": "https://servidoresminecraft.co",
+        "sameAs": [
+          "https://twitter.com/Servidores__MC"
+        ]
+      }
