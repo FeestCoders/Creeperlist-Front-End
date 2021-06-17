@@ -142,7 +142,7 @@ router.post('/:id/edit', newLimiter, recaptcha.middleware.verify, ensureLoggedIn
 router.get('/:id', function (req, res, next) {
     Server.findById(validator.escape(req.params.id)).populate('owner').exec(function (err, server) {
         if (err) {
-            req.flash('danger', 'The server was not found! It may have been erased :S');
+            req.flash('danger', 'The server was not found! It may have been deleted :S');
             return res.redirect('/');
         }
         res.render('server', {title: server.name, user: req.user, server: server, moment: moment});
@@ -152,7 +152,7 @@ router.get('/:id', function (req, res, next) {
 router.get('/:id/like', recaptcha.middleware.render, function (req, res, next) {
     Server.findById(validator.escape(req.params.id)).populate('owner').exec(function (err, server) {
         if (err) {
-            req.flash('danger', 'The server was not found! It may have been erased :(');
+            req.flash('danger', 'The server was not found! It may have been deleted :(');
             return res.redirect('/');
         }
         res.render('vote', {title: server.name, user: req.user, server: server, captcha: req.recaptcha});
@@ -162,7 +162,7 @@ router.get('/:id/like', recaptcha.middleware.render, function (req, res, next) {
 router.get('/:id/edit', recaptcha.middleware.render, ensureLoggedIn('/login'), function (req, res, next) {
     Server.findById(validator.escape(req.params.id)).populate('owner').exec(function (err, server) {
         if (err) {
-            req.flash('danger', 'The server was not found! It may have been erased :(');
+            req.flash('danger', 'The server was not found! It may have been deleted :(');
             return res.redirect('/');
         }
         if (server.owner._id !== req.user._id) return showerror('The server does not belong to you :P', req, res);
@@ -176,7 +176,7 @@ const likeLimiter = new RateLimit({
     delayAfter: 1,
     delayMs: 3 * 1000,
     max: 1,
-    message: "Vuelve mañana para darle like a otro servidor.",
+    message: "Come back tomorrow to like another server.",
     store: store
 });
 router.post('/:id/like', likeLimiter, recaptcha.middleware.verify, function (req, res, next) {
@@ -186,7 +186,7 @@ router.post('/:id/like', likeLimiter, recaptcha.middleware.verify, function (req
     }
     Server.findById(validator.escape(req.params.id)).populate('owner').exec(function (err, server) {
         if (err) {
-            req.flash('danger', 'The server was not found! It may have been erased :O');
+            req.flash('danger', 'The server was not found! It may have been deleted :O');
             return res.redirect('/');
         }
         Server.update({_id: server._id}, {$inc: {likes: 1}}, function (err) {
