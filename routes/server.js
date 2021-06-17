@@ -11,7 +11,7 @@ const RateLimit = require('express-rate-limit');
 const votifier = require('votifier-send');
 const cache = require('express-redis-cache')({ expire: 60 });
 
-moment.locale('es');
+moment.locale('en');
 
 let store;
 if (process.env.NODE_ENV !== 'production') {
@@ -43,7 +43,7 @@ router.get('/:id/img', cache.route(), function (req, res, next) {
 });
 
 router.get('/new', recaptcha.middleware.render, ensureLoggedIn('/login'), function (req, res, next) {
-    res.render('new', {title: 'Crear nuevo', user: req.user, captcha: req.recaptcha});
+    res.render('new', {title: 'Create new', user: req.user, captcha: req.recaptcha});
 });
 
 const newLimiter = new RateLimit({
@@ -64,7 +64,7 @@ router.post('/new', newLimiter, recaptcha.middleware.verify, ensureLoggedIn('/lo
     if (req.body.games && !validator.isAscii(req.body.games)) return showerror('Tags contain illegal characters', req, res);
     if (req.body.youtube && !validator.isURL(req.body.youtube, {host_whitelist: ['youtu.be', 'youtube.com']})) return showerror('Link to YouTube trailer is invalid', req, res);
 
-    if (req.body.port && (req.body.port > 65535 || req.body.port <= 0)) return showerror('El puerto no es válido', req, res);
+    if (req.body.port && (req.body.port > 65535 || req.body.port <= 0)) return showerror('The port is invalid', req, res);
 
     let server = new Server({
         name: validator.escape(req.body.name),
