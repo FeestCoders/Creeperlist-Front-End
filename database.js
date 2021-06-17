@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost/mc';
-
-mongoose.connect(url);
+const url = 'mongodb://localhost/mc2';
+mongoose.Promise = global.Promise;
+mongoose.connect(url, {useMongoClient:true});
 
 let db = mongoose.connection;
 
