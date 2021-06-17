@@ -30,7 +30,7 @@ router.get('/login', function (req, res) {
     }
 });
 
-const url = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https://servidoresminecraft.co';
+const url = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'https//creeperlist.com';
 
 // Facebook
 passport.use(new FacebookStrategy({
