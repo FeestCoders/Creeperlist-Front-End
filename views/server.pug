@@ -21,44 +21,44 @@ block content
                 .caption.table-responsive
                     table.table
                         tr
-                            td Añadido por
+                            td Added by
                             td #{server.owner.displayName}
                         tr
-                            td Estado
+                            td Condition
                             if(new Date() - server.lastcheck < 120 * 1000)
-                                td En línea
+                                td Online
                             else
-                                td No disponible
+                                td Offline
                         tr
                             td IP
                             td: a.copy(data-toggle='popover', data-placement='top', data-content='Copied!', ip=server.fullip, href='#')
                                 |  #{server.fullip}&nbsp;
                                 i.fa.fa-clone.text-info(aria-hidden='true')
                         tr
-                            td Jugadores
+                            td Players
                             td #{server.players}/#{server.max}
                         tr
-                            td Versión
+                            td Version
                             td #{server.version.replace(/§[0-9a-fA-Flk]/g, '')}
                         tr
                             td Likes
                             td #{server.likes}
                         tr
-                            td Disponibilidad
+                            td Availability
                             td #{parseInt(server.success / server.times * 100)}%
                         tr
-                            td Comprobado
+                            td Checked
                             td #{moment(server.lastcheck).fromNow()}
                         tr
-                            td Etiquetas
+                            td Labels
                             td #{server.games.join(', ') || 'Unknown'}
                     a.btn.btn-warning(href='/server/' + server.name + '/like', role='button')
                         i.glyphicon.glyphicon-heart-empty(aria-hidden='true')
-                        |  Me gusta
+                        |  Like
                     if(user && server.owner._id === user._id)
                         a.btn.btn-primary(href='/server/' + server.name + '/edit', role='button')
                             i.glyphicon.glyphicon-edit(aria-hidden='true')
-                            |  Editar
+                            |  Edit
 
             .col-md-6
                 .panel.panel-default
