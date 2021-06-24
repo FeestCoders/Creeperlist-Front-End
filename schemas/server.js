@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const ObjectId = require('mongoose').Types.ObjectId;
 const mongoosePaginate = require('mongoose-paginate');
 
-const serverSchem = new Schema({
+const serverSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -118,17 +118,17 @@ function isValidObjectID(str) {
     return valid;
 }
 
-serverSchem.index({name: 'text', ip: 'text', description: 'text', games: 'text'});
-serverSchem.plugin(mongoosePaginate);
+serverSchema.index({name: 'text', ip: 'text', description: 'text', games: 'text'});
+serverSchema.plugin(mongoosePaginate);
 
-serverSchem.statics.findById = function (id, cb) {
+serverSchema.statics.findById = function (id, cb) {
     let objId = new ObjectId(!isValidObjectID(id) ? "123456789012" : id);
     return this.findOne({$or: [{'_id': objId}, {'name': id}]}, cb);
 };
-serverSchem.virtual('fullip').get(function () {
+serverSchema.virtual('fullip').get(function () {
     return this.ip + ((this.port && this.port !== 25565) ? ':' + this.port : '');
 });
-serverSchem.virtual('embed').get(function () {
+serverSchema.virtual('embed').get(function () {
     return 'https://www.youtube.com/embed/' + getYoutube(this.youtube);
 });
-module.exports = mongoose.model('Server', serverSchem);
+module.exports = mongoose.model('Server', serverSchema);

@@ -85,6 +85,7 @@ router.post('/new', newLimiter, recaptcha.middleware.verify, ensureLoggedIn('/lo
 
     server.save(function (err) {
         if (err) {
+            console.log(err);
             req.flash('danger', "The server could not be registered. Check that it has not been added by another user. If you think it is an error, let us know on Discord: dsc.gg/bennocraft");
             return res.redirect('/server');
         }
