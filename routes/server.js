@@ -5,7 +5,7 @@ const Server = require('../schemas/server');
 const moment = require('moment');
 
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
-const recaptcha = require('express-recaptcha');
+// const recaptcha = require('express-recaptcha');
 const validator = require('validator');
 const RateLimit = require('express-rate-limit');
 const votifier = require('votifier-send');
@@ -13,14 +13,14 @@ const cache = require('express-redis-cache')({ expire: 60 });
 
 moment.locale('en');
 
-let store;
-if (process.env.NODE_ENV !== 'production') {
-    recaptcha.init('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe');
-} else {
-    recaptcha.init('6LfA8ScUAAAAAGyT1EyJ_ny3CWjyBTWqk6EHtQyS', '6LfA8ScUAAAAAOiXYKxUbKVCdPpvZFQXE5cMV_cI');
-    const RedisStore = require('rate-limit-redis');
-    store = new RedisStore({});
-}
+// let store;
+// if (process.env.NODE_ENV !== 'production') {
+//    recaptcha.init('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe');
+// } else {
+//    recaptcha.init('6LfA8ScUAAAAAGyT1EyJ_ny3CWjyBTWqk6EHtQyS', '6LfA8ScUAAAAAOiXYKxUbKVCdPpvZFQXE5cMV_cI');
+//    const RedisStore = require('rate-limit-redis');
+//    store = new RedisStore({});
+// }
 
 router.get('/', ensureLoggedIn('/login'), function (req, res, next) {
     Server.find({owner: req.user._id}, function (err, servers) {
@@ -42,8 +42,8 @@ router.get('/:id/img', cache.route(), function (req, res, next) {
     });
 });
 
-router.get('/new', recaptcha.middleware.render, ensureLoggedIn('/login'), function (req, res, next) {
-    res.render('new', {title: 'Create new', user: req.user, captcha: req.recaptcha});
+router.get('/new', /*recaptcha.middleware.render,*/ ensureLoggedIn('/login'), function (req, res, next) {
+    res.render('new', {title: 'Create new', user: req.user, /*captcha: req.recaptcha*/});
 });
 
 const newLimiter = new RateLimit({
@@ -52,14 +52,14 @@ const newLimiter = new RateLimit({
     delayMs: 3 * 1000,
     max: 5,
     message: "You can't create so many servers in such a short time.",
-    store: store
+   // store: store
 });
 
-router.post('/new', newLimiter, recaptcha.middleware.verify, ensureLoggedIn('/login'), function (req, res, next) {
-    if (req.recaptcha.error) {
-        req.flash('danger', 'You have not completed the captcha!');
-        return res.redirect('/server/');
-    }
+router.post('/new', newLimiter, /*recaptcha.middleware.verify,*/ ensureLoggedIn('/login'), function (req, res, next) {
+   // if (req.recaptcha.error) {
+   //     req.flash('danger', 'You have not completed the captcha!');
+   //     return res.redirect('/server/');
+   // }
     if (!validator.isAlphanumeric(req.body.name, 'en-US')) return showerror('The name contains illegal characters', req, res);
     if (!validator.isIP(req.body.ip) && !validator.isURL(req.body.ip)) return showerror('The IP is invalid', req, res);
     if (req.body.games && !validator.isAscii(req.body.games)) return showerror('Tags contain illegal characters', req, res);
@@ -96,14 +96,14 @@ router.post('/new', newLimiter, recaptcha.middleware.verify, ensureLoggedIn('/lo
     });
 });
 
-router.post('/:id/edit', newLimiter, recaptcha.middleware.verify, ensureLoggedIn('/login'), function (req, res, next) {
-    if (req.recaptcha.error) {
-        req.flash('danger', 'You have not completed the captcha!');
-        return res.redirect('/server/' + validator.escape(req.params.id));
-    }
+router.post('/:id/edit', newLimiter, /*recaptcha.middleware.verify,*/ ensureLoggedIn('/login'), function (req, res, next) {
+    // if (req.recaptcha.error) {
+    //    req.flash('danger', 'You have not completed the captcha!');
+    //    return res.redirect('/server/' + validator.escape(req.params.id));
+    // }
     Server.findById(validator.escape(req.params.id)).populate('owner').exec(function (err, server) {
         if (err) {
-            req.flash('danger', '¡The server was not found! It may have been deleted.');
+            req.flash('danger', 'The server was not found! It may have been deleted.');
             return res.redirect('/');
         }
 
@@ -151,17 +151,17 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
-router.get('/:id/like', recaptcha.middleware.render, function (req, res, next) {
+router.get('/:id/like', /*recaptcha.middleware.render,*/ function (req, res, next) {
     Server.findById(validator.escape(req.params.id)).populate('owner').exec(function (err, server) {
         if (err) {
             req.flash('danger', 'The server was not found! It may have been deleted :(');
             return res.redirect('/');
         }
-        res.render('vote', {title: server.name, user: req.user, server: server, captcha: req.recaptcha});
+        res.render('vote', {title: server.name, user: req.user, server: server/*, captcha: req.recaptcha*/});
     });
 });
 
-router.get('/:id/edit', recaptcha.middleware.render, ensureLoggedIn('/login'), function (req, res, next) {
+router.get('/:id/edit', /*recaptcha.middleware.render,*/ ensureLoggedIn('/login'), function (req, res, next) {
     Server.findById(validator.escape(req.params.id)).populate('owner').exec(function (err, server) {
         if (err) {
             req.flash('danger', 'The server was not found! It may have been deleted :(');
@@ -169,7 +169,7 @@ router.get('/:id/edit', recaptcha.middleware.render, ensureLoggedIn('/login'), f
         }
         if (server.owner._id !== req.user._id) return showerror('The server does not belong to you :P', req, res);
 
-        res.render('edit', {title: server.name, user: req.user, server: server, captcha: req.recaptcha});
+        res.render('edit', {title: server.name, user: req.user, server: server/*,captcha: req.recaptcha*/});
     });
 });
 
@@ -179,13 +179,13 @@ const likeLimiter = new RateLimit({
     delayMs: 3 * 1000,
     max: 1,
     message: "Come back tomorrow to like another server.",
-    store: store
+   // store: store
 });
-router.post('/:id/like', likeLimiter, recaptcha.middleware.verify, function (req, res, next) {
-    if (req.recaptcha.error) {
-        req.flash('danger', 'You have not completed the captcha!');
-        return res.redirect('/server/' + validator.escape(req.params.id) + '/like');
-    }
+router.post('/:id/like', likeLimiter, /*recaptcha.middleware.verify,*/ function (req, res, next) {
+   // if (req.recaptcha.error) {
+   //     req.flash('danger', 'You have not completed the captcha!');
+   //     return res.redirect('/server/' + validator.escape(req.params.id) + '/like');
+   // }
     Server.findById(validator.escape(req.params.id)).populate('owner').exec(function (err, server) {
         if (err) {
             req.flash('danger', 'The server was not found! It may have been deleted :O');
