@@ -9,13 +9,13 @@ const serverSchema = new Schema({
         required: true,
         index: true,
         unique: true,
-        validate: {
-            validator: function (v) {
-                let re;
-                if (v && v.length) re = /^[a-z]$/i;
-                return re.test(v);
-            },
-        }
+       // validate: {
+       //     validator: function (v) {
+       //         let re;
+       //         if (v && v.length) re = /^[a-z]$/i;
+       //         return re.test(v);
+       //     },
+       // }
     },
     port: {
         type: Number,
