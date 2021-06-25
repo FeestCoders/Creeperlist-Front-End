@@ -54,6 +54,7 @@ const newLimiter = new RateLimit({
     message: "You can't create so many servers in such a short time.",
     store: store
 });
+
 router.post('/new', newLimiter, recaptcha.middleware.verify, ensureLoggedIn('/login'), function (req, res, next) {
     if (req.recaptcha.error) {
         req.flash('danger', 'You have not completed the captcha!');
@@ -85,7 +86,7 @@ router.post('/new', newLimiter, recaptcha.middleware.verify, ensureLoggedIn('/lo
 
     server.save(function (err) {
         if (err) {
-            console.log(err);
+            console.log(err)
             req.flash('danger', "The server could not be registered. Check that it has not been added by another user. If you think it is an error, let us know on Discord: dsc.gg/bennocraft");
             return res.redirect('/server');
         }
@@ -203,7 +204,7 @@ router.post('/:id/like', likeLimiter, recaptcha.middleware.verify, function (req
                 port: server.votifier_port || 8192,
                 data: {
                     user: validator.escape(req.body.user),
-                    site: 'servidoresminecraft.co',
+                    site: 'creeperlist.bennocraft.net',
                     addr: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
                     timestamp: new Date().getTime()
                 }
