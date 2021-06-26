@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -33,7 +34,7 @@ app.use(session({
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
     },
-    secret: '7w4TxI$"&fbUNxI$"&fQqX5Rdfsgsdpenesgr5DbCWz',
+    secret: process.env.SESSIONSECRET,
     resave: false,
     saveUninitialized: true,
     store: new MongoDBStore({

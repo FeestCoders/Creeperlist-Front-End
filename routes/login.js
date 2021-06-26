@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.get('/logout', function (req, res) {
 
 router.get('/login', function (req, res) {
     if(!req.user) {
-        res.render('login', {title: 'Iniciar sesión'});
+        res.render('login', {title: 'Log in'});
     } else {
         res.redirect('/');
     }
@@ -34,8 +35,8 @@ const url = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'h
 
 // Facebook
 passport.use(new FacebookStrategy({
-        clientID: '486149032447643',
-        clientSecret: 'd64a83c3a9f06244e568b96f652d9d4b',
+        clientID: process.env.FACEBOOKCLIENTID,
+        clientSecret: process.env.FACEBOOKCLIENTSECRET,
         callbackURL: url + "/auth/facebook/callback"
     },
     function(a, b, profile, done) {
@@ -64,8 +65,8 @@ router.get('/auth/facebook/callback',
 
 // Twitter
 passport.use(new TwitterStrategy({
-        consumerKey: 'zSJg2YeoBi0RRXo19BHfgUL5j',
-        consumerSecret: 'mjOKRADpsV4MBrHm0kSlq1XYUBgpchRvSLrwaD0VG0jJtnnNlZ',
+        consumerKey: process.env.TWITTERCONSUMERKEY,
+        consumerSecret: process.env.TWITTERCONSUMERSECRET,
         callbackURL: url + "/auth/twitter/callback"
     },
     function(a, b, profile, done) {
@@ -95,8 +96,8 @@ router.get('/auth/twitter/callback',
 
 // Google
 passport.use(new GoogleStrategy({
-        clientID: '415305972290-h4ugcqlh6ov2kqg76t9hdjg15pk5kice.apps.googleusercontent.com',
-        clientSecret: 'fJHGgTpUaUpWofT1aZwqFLtk',
+        clientID: process.env.GOOGLECLIENTID,
+        clientSecret: process.env.GOOGLECLIENTSECRET,
         callbackURL: url + "/auth/google/callback"
     },
     function(a, b, profile, done) {

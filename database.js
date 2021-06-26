@@ -1,5 +1,6 @@
+require('dotenv').config()
 const mongoose = require('mongoose');
-const url = 'mongodb://localhost/mc2';
+const url = process.env.MONGOURL;
 mongoose.Promise = global.Promise;
 mongoose.connect(url, {useMongoClient:true});
 

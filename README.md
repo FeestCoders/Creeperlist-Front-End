@@ -1,6 +1,10 @@
 ## Creeperlist-Front-End
 
 
+.env
+
+Rename .example.env to .env and fill out the fields.
+
 Install dependencies
 
 ```
